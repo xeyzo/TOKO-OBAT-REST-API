@@ -13,7 +13,7 @@ const validate = [
             return res.status(422).json({ errors : errors.array() })           
         }
 
-        next();
+       return next();
     }
 ]
 

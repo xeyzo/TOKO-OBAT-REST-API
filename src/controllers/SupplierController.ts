@@ -1,15 +1,14 @@
 import { Request, Response } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
 
 const db = require('../db/models')
 
 class SupplierController {
     create = async (req: Request, res: Response): Promise<any> => {
         try {
-            const { nama_supplier, alamat, kota, telpon } = req.body;
+            const { nama_suplier, alamat, kota, telpon } = req.body;
 
-            const create =await db.tbl_supplier.create({
-                nama_supplier, alamat, kota, telpon
+            const create =await db.tbl_suplier.create({
+                nama_suplier, alamat, kota, telpon
             })
 
             if (create) {

@@ -6,8 +6,8 @@ const router = express.Router()
 router.post('/', auth, ObatController.create);
 router.get('/', auth,  ObatController.index);
 router.get('/:id', auth, ObatController.find);
-// router.put('/:id', auth, ObatController.update);
-// router.delete('/:id', auth, ObatController.delete)
+router.put('/:id', auth, ObatController.update);
+router.delete('/:id', auth, ObatController.delete)
 
 
 

@@ -13,7 +13,6 @@ export const auth = ( req:Request, res:Response, next:NextFunction ) : any => {
     let secretKey: any = `${process.env.JWT_SECRET_KEY}`
     const token : any = req.headers.authorization;
 
-    console.log(secretKey)
     const berear: string = token.split(' ')[1];
 
     try {
@@ -21,7 +20,7 @@ export const auth = ( req:Request, res:Response, next:NextFunction ) : any => {
 
         if (credential) {
             req.app.locals.credential = credential
-            next()
+            return next()
         }
         return res.send(`invalid token`)
     } catch (error) {

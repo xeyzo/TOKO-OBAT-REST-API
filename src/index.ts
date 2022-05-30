@@ -11,6 +11,8 @@ import { todoRouter } from "./routes/todo.router";
 import { userRouter } from "./routes/user.router"; 
 import { authRouter } from "./routes/auth.routes";
 import { obatRouter } from "./routes/obat.router";
+import { suplierRouter } from "./routes/suplier.router";
+
 
 
 dotenv.config()
@@ -40,6 +42,7 @@ class App{
         this.app.use('/api/v1/user', userRouter);
         this.app.use('/api/v1/auth', authRouter);
         this.app.use('/api/v1/obat', obatRouter);
+        this.app.use('/api/v1/suplier', suplierRouter);
 
 
         this.app.use(todoRouter);
