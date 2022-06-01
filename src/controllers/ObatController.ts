@@ -1,17 +1,16 @@
 import { Request, Response } from "express";
+import ObatService from "../services/ObatService";
 
 const db = require('../db/models')
 
 class ObatController {
     create = async (req: Request, res: Response): Promise<any> => {
         try {
-            const { nama_obat, jenis, satuan, harga_beli, harga_jual, stok, kd_suplier } = req.body;
+            const service: ObatService = new ObatService(req);
 
-            const obat = await db.tbl_obat.create({
-                nama_obat, jenis, satuan, harga_beli, harga_jual, stok, kd_suplier
-            })
+            const obat = await service.create();
 
-            console.log(obat)
+
             return res.send({
                 data : obat,
                 message: "data berhasil di simpan"
@@ -25,12 +24,12 @@ class ObatController {
 
     index = async (req: Request, res: Response): Promise<any> => {
         try {
-            const index = await db.tbl_obat.findAll({
-                attributes: ['id', 'nama_obat', 'jenis', 'satuan', 'harga_beli', 'harga_jual', 'stok', 'kd_suplier']
-            })
+            const service: ObatService = new ObatService(req);
+
+            const obat = await service.getAll();
     
             return res.send({
-                data : index
+                data : obat
             })
         } catch (error) {
             res.send({
@@ -41,15 +40,12 @@ class ObatController {
 
     find = async (req: Request, res: Response): Promise<any> => {
         try {
-            const { id } = req.params
+            const service: ObatService = new ObatService(req);
 
-            const findData = await db.tbl_obat.findOne({
-                where: { id },
-                attributes: ['id', 'nama_obat', 'jenis', 'satuan', 'harga_beli', 'harga_jual', 'stok', 'kd_suplier', 'createdAt', 'updatedAt']
-            })
-        
+            const obat = await service.getOne();
+
             return res.send({
-                data: findData,
+                data: obat,
                 message:"data berhasil ditemukan" 
             }).status(200)
         } catch (error) {
@@ -59,17 +55,12 @@ class ObatController {
 
     update = async (req: Request, res: Response): Promise<any> => {
         try {
-            const { id } = req.params;
-            const { satuan, harga_beli, harga_jual ,stok } = req.body;
+            const service: ObatService = new ObatService(req);
 
-            const obat =  await db.tbl_obat.update({
-                satuan, harga_beli, harga_jual ,stok
-            },{
-                where: { id }
-            })
-            console.log(obat)
+            const obat = await service.update();
 
             return res.send({
+                data: obat,
                 message:"data berhasil diperbarui"
             })
 
@@ -80,11 +71,9 @@ class ObatController {
 
     delete = async (req: Request, res: Response): Promise<any> => {
         try {
-            const { id } = req.params;
-            
-            await db.tbl_obat.destroy({
-                where : { id }
-            })
+            const service: ObatService = new ObatService(req);
+
+            await service.delete();
 
             return res.send({
                 message: "data berhasil dihapus"

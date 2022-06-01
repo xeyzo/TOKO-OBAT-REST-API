@@ -3,9 +3,11 @@ import SupplierController from "../controllers/SupplierController";
 import { auth } from "../middlewares/auth.middleware"
 const router = express.Router()
 
-router.post('/', SupplierController.create);
-// router.put('/:id', auth, ObatController.update);
-// router.delete('/:id', auth, ObatController.delete)
+router.post('/', auth, SupplierController.create);
+router.get('/', auth,  SupplierController.index);
+router.get('/:id', auth, SupplierController.find);
+router.put('/:id', auth, SupplierController.update);
+router.delete('/:id', auth, SupplierController.delete)
 
 
 

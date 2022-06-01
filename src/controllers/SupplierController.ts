@@ -1,76 +1,89 @@
 import { Request, Response } from "express";
+import SuplierService from "../services/SuplierService";
 
 const db = require('../db/models')
 
-class SupplierController {
+class ObatController {
     create = async (req: Request, res: Response): Promise<any> => {
         try {
-            const { nama_suplier, alamat, kota, telpon } = req.body;
+            const service: SuplierService = new SuplierService(req);
 
-            const create =await db.tbl_suplier.create({
-                nama_suplier, alamat, kota, telpon
+            const suplier = await service.create();
+
+
+            return res.send({
+                data : suplier,
+                message: "data berhasil di simpan"
             })
 
-            if (create) {
-                return res.send({
-                    data: create,
-                    message: "save success"
-                }).status(200)
-            }
-
-            return res.send(`isi semua field`)
-           
         } catch (error) {
-            res.send('data gagal di save').status(401)
+            res.send("data gagal di save")
+        }
+           
+    };
+
+    index = async (req: Request, res: Response): Promise<any> => {
+        try {
+            const service: SuplierService = new SuplierService(req);
+
+            const suplier = await service.getAll();
+    
+            return res.send({
+                data : suplier
+            })
+        } catch (error) {
+            res.send({
+                message:"data kosong"
+            }).status(401)
         }
     };
 
-    // index = async (req: Request, res: Response): Promise<any> => {
-    //     const { id } = req.app.locals.credential;
-    //     const index = await db.obat.findAll({
-    //         where: {user_id: id},
-    //         attributes: ['id', 'nama_obat', 'jenis', 'satuan', 'harga_beli', 'harga_jual', 'stok', 'kd_suplier']
-    //     })
+    find = async (req: Request, res: Response): Promise<any> => {
+        try {
+            const service: SuplierService = new SuplierService(req);
 
-    //     return res.send({
-    //         data : index,
-    //         message: "data berhasil di get"
-    //     })
-    // };
+            const suplier = await service.getOne();
+        
+            return res.send({
+                data: suplier,
+                message:"data berhasil ditemukan" 
+            }).status(200)
+        } catch (error) {
+            res.send("data yang anda cari tidak tersedia").status(401)
+        }
+    };
 
-    // find = async (req: Request, res: Response): Promise<any> => {
-    //     try {
-    //         const { id } = req.params
+    update = async (req: Request, res: Response): Promise<any> => {
+        try {
+            const service: SuplierService = new SuplierService(req);
 
-    //         const findData = await db.obat.findOne({
-    //             where : { id }
-    //         })
+            const suplier = await service.update();
 
-    //         console.log(findData)
+            return res.send({
+                data:suplier,
+                message:"data berhasil diperbarui"
+            })
 
-    //         return res.send(findData).status(200)
-    //     } catch (error) {
-    //         res.send(`data tidak ditemukan`).status(401)
-    //     }
-    // };
+        } catch (error) {
+            res.send("data gagal diperbaharui").status(401) 
+        }
+    };
 
-    // update = async (req: Request, res: Response): Response {
-    //     try {
-            
-    //     } catch (error) {
-            
-    //     }
-    // };
+    delete = async (req: Request, res: Response): Promise<any> => {
+        try {
+            const service: SuplierService = new SuplierService(req);
 
-    // delete = async (req: Request, res: Response): Response {
-    //     try {
-            
-    //     } catch (error) {
-            
-    //     }
-    // };
+            await service.delete();
+
+            return res.send({
+                message: "data berhasil dihapus"
+            }).status(200)
+        } catch (error) {
+            res.send(error)
+        }
+    };
     
 }
 
 
-export default  new SupplierController();
+export default  new ObatController();
