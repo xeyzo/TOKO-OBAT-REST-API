@@ -14,6 +14,7 @@ import { obatRouter } from "./routes/obat.router";
 import { suplierRouter } from "./routes/suplier.router";
 import { pembelianRouter } from "./routes/pembelian.router";
 import { pembelianDetailRouter } from "./routes/pembelian.detail.router";
+import { penjualanDetailRouter } from "./routes/penjualan.detail.router";
 
 
 
@@ -47,6 +48,8 @@ class App{
         this.app.use('/api/v1/suplier', suplierRouter);
         this.app.use('/api/v1/pembelian', pembelianRouter);
         this.app.use('/api/v1/pembelian_detail', pembelianDetailRouter);
+        this.app.use('/api/v1/penjualan_detail', penjualanDetailRouter);
+
 
 
 
