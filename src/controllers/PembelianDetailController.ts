@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import PembelianDetailService from "../services/PembelianDetail";
+import PembelianDetailService from "../services/PembelianDetailService";
 
 const db = require('../db/models')
 

@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import PenjualanDetailService from "../services/PenjualanDetailService";
+import PenjualanService from "../services/PenjualanService";
 
 const db = require('../db/models')
 
-class PenjualanDetailController {
+class PenjualanController {
     create = async (req: Request, res: Response): Promise<any> => {
         try {
-            const service: PenjualanDetailService = new PenjualanDetailService(req);
+            const service: PenjualanService = new PenjualanService(req);
 
             const penjualan = await service.create();
 
@@ -24,7 +24,7 @@ class PenjualanDetailController {
 
     index = async (req: Request, res: Response): Promise<any> => {
         try {
-            const service: PenjualanDetailService = new PenjualanDetailService(req);
+            const service: PenjualanService = new PenjualanService(req);
 
             const penjualan = await service.getAll();
     
@@ -40,7 +40,7 @@ class PenjualanDetailController {
 
     find = async (req: Request, res: Response): Promise<any> => {
         try {
-            const service: PenjualanDetailService = new PenjualanDetailService(req);
+            const service: PenjualanService = new PenjualanService(req);
 
             const penjualan = await service.getOne();
 
@@ -55,7 +55,7 @@ class PenjualanDetailController {
 
     update = async (req: Request, res: Response): Promise<any> => {
         try {
-            const service: PenjualanDetailService = new PenjualanDetailService(req);
+            const service: PenjualanService = new PenjualanService(req);
 
             const penjualan = await service.update();
 
@@ -71,7 +71,7 @@ class PenjualanDetailController {
 
     delete = async (req: Request, res: Response): Promise<any> => {
         try {
-            const service: PenjualanDetailService = new PenjualanDetailService(req);
+            const service: PenjualanService = new PenjualanService(req);
 
             await service.delete();
 
@@ -86,4 +86,4 @@ class PenjualanDetailController {
 }
 
 
-export default  new PenjualanDetailController();
+export default  new PenjualanController();
