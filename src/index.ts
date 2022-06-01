@@ -9,13 +9,14 @@ import cors from "cors";
 //Router
 import { todoRouter } from "./routes/todo.router";
 import { userRouter } from "./routes/user.router"; 
-import { authRouter } from "./routes/auth.routes";
+import { authRouter } from "./routes/auth.router";
 import { obatRouter } from "./routes/obat.router";
 import { suplierRouter } from "./routes/suplier.router";
 import { pembelianRouter } from "./routes/pembelian.router";
 import { pembelianDetailRouter } from "./routes/pembelian.detail.router";
 import { penjualanDetailRouter } from "./routes/penjualan.detail.router";
 import { penjualanRouter } from "./routes/penjualan.router";
+import { pelangganRouter } from "./routes/pelanggan.router";
 
 
 
@@ -49,6 +50,7 @@ class App{
         this.app.use('/api/v1/suplier', suplierRouter);
         this.app.use('/api/v1/pembelian', pembelianRouter);
         this.app.use('/api/v1/penjualan', penjualanRouter);
+        this.app.use('/api/v1/pelanggan', pelangganRouter);
         this.app.use('/api/v1/pembelian_detail', pembelianDetailRouter);
         this.app.use('/api/v1/penjualan_detail', penjualanDetailRouter);
 
